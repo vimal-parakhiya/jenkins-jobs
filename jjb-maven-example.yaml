@@ -1,0 +1,22 @@
+- job:
+    name: mvn-build-example
+    project-type: maven
+    description: 'A basic example of a `jjb` to build Maven project"'
+
+    maven:
+      root-module:
+        group-id: com.github.vp
+        artifact-id: spring-batch-example
+      root-pom: pom.xml
+      goals: "clean install"
+      
+    scm:
+      - git:
+          url: https://github.com/vimal-parakhiya/spring-batch-example.git
+          branches:
+            - origin/master
+          clean:
+            true
+    triggers:
+      - github
+

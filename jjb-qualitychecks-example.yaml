@@ -1,0 +1,44 @@
+- job:
+    name: mvn-qualitychecks-example
+    project-type: maven
+    description: 'A basic example of a `jjb` demonstrating quality checks"'
+
+    maven:
+      root-pom: pom.xml
+      goals: "clean install site site:stage"
+      
+    scm:
+      - git:
+          url: https://github.com/vimal-parakhiya/quality-checks-example.git
+          branches:
+            - origin/master
+          clean:
+            true
+
+    triggers:
+      - github
+      
+    publishers:
+      - violations:
+          cpd:
+            min: 0
+            min: 1000
+            unstable: 100
+            pattern: '**/cpd.xml'
+          pmd:
+            min: 0
+            min: 1000
+            unstable: 100
+            pattern: '**/pmd.xml'
+          checkstyle:
+            min: 0
+            min: 1000
+            unstable: 100
+            pattern: '**/checkstyle-result.xml'
+          findbugs:
+            min: 0
+            min: 1000
+            unstable: 100
+            pattern: '**/findbugsXml.xml'
+
+
