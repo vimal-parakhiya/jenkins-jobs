@@ -5,7 +5,7 @@
 
     maven:
       root-pom: pom.xml
-      goals: "clean install site site:stage"
+      goals: "clean install sonar:sonar"
       
     scm:
       - git:

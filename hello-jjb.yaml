@@ -1,7 +1,7 @@
 - job:
     name: Basic example
     project-type: freestyle
-    description: 'A basic example of a `jjb` job that echos "Hello world and cats out /etc/password"'
+    description: 'A basic example of a `jjb` job that echos "Hello JJB!!"'
     builders:
         - shell: |
             echo 'Hello Jenkins Job Builder!'
