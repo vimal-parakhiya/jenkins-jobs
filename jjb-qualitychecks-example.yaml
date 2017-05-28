@@ -5,7 +5,7 @@
 
     maven:
       root-pom: pom.xml
-      goals: "clean install sonar:sonar"
+      goals: "clean org.jacoco:jacoco-maven-plugin:prepare-agent install -Dmaven.test.failure.ignore=true sonar:sonar -Dsonar.login=fb68cfbe87fe3a5a9eff0f3e90de08adf42adfe1 -DactivateSonar"
       
     scm:
       - git:
@@ -16,7 +16,9 @@
             true
 
     triggers:
-      - github
+      - pollscm:
+          cron: "0/30 0/1 * 1/1 * ? *"
+          ignore-post-commit-hooks: True
       
     publishers:
       - violations:
