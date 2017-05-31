@@ -5,7 +5,8 @@
 
     maven:
       root-pom: pom.xml
-      goals: "clean org.jacoco:jacoco-maven-plugin:prepare-agent install -Dmaven.test.failure.ignore=true sonar:sonar -Dsonar.login=fb68cfbe87fe3a5a9eff0f3e90de08adf42adfe1 -DactivateSonar"
+      #goals: "clean org.jacoco:jacoco-maven-plugin:prepare-agent install -Dmaven.test.failure.ignore=true sonar:sonar -Dsonar.login=fb68cfbe87fe3a5a9eff0f3e90de08adf42adfe1 -DactivateSonar"
+      goals: "clean org.jacoco:jacoco-maven-plugin:prepare-agent install -Dmaven.test.failure.ignore=true sonar:sonar -Dsonar.analysis.mode=preview -Dsonar.issuesReport.html.enable=true"
       
     scm:
       - git:
@@ -14,13 +15,15 @@
             - origin/master
           clean:
             true
-
-    triggers:
-      - pollscm:
-          cron: "0/30 0/1 * 1/1 * ? *"
-          ignore-post-commit-hooks: True
       
     publishers:
+      - html-publisher:
+          name: "Sonar Reports"
+          dir: "target/sonar/issues-report/"
+          files: "issues-report.html,issues-report-light.html"
+          keep-all: true
+          allow-missing: true
+          link-to-last-build: true
       - violations:
           cpd:
             min: 0
