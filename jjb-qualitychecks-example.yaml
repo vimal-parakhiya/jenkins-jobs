@@ -5,8 +5,8 @@
 
     maven:
       root-pom: pom.xml
-      #goals: "clean org.jacoco:jacoco-maven-plugin:prepare-agent install -Dmaven.test.failure.ignore=true sonar:sonar -Dsonar.login=fb68cfbe87fe3a5a9eff0f3e90de08adf42adfe1 -DactivateSonar"
-      goals: "clean org.jacoco:jacoco-maven-plugin:prepare-agent install -Dmaven.test.failure.ignore=true sonar:sonar -Dsonar.analysis.mode=preview -Dsonar.issuesReport.html.enable=true"
+      #goals: "clean install sonar:sonar -DlocalSonarScan"
+      goals: "clean install sonar:sonar -DperformSonarScan -Dsonar.login=jenkins -Dsonar.password=jenkins"
       
     scm:
       - git:
